@@ -8,12 +8,12 @@ write them to an output file, one address per line.
 
 Features
 --------
-* Strict dotted-quad validation (each octet in the range 0-255, no leading
+ Strict dotted-quad validation (each octet in the range 0-255, no leading
   zeros).
-* Boundary-aware matching: substrings of longer numeric sequences such as
+ Boundary-aware matching: substrings of longer numeric sequences such as
   ``1234.1.1.1``, ``1.1.1.1234``, or ``1.2.3.4.5`` are NOT extracted.
-* Optional de-duplication (``--unique``) while preserving first-seen order.
-* Optional numeric sorting (``--sorted``) using ``ipaddress.IPv4Address``.
+ Optional de-duplication (``--unique``) while preserving first-seen order.
+ Optional numeric sorting (``--sorted``) using ``ipaddress.IPv4Address``.
 
 Usage
 -----
@@ -72,7 +72,7 @@ IPV4_REGEX = re.compile(
 # Core API (small, pure functions that are easy to unit-test)
 # ---------------------------------------------------------------------------
 def extract_ipv4_addresses(text: str) -> List[str]:
-    """Return every IPv4 address found in *text*, in order of appearance.
+    """Return every IPv4 address found in text, in order of appearance.
 
     Duplicates are preserved; use :func:`deduplicate_preserve_order` to remove
     them while keeping the original ordering.
@@ -81,7 +81,7 @@ def extract_ipv4_addresses(text: str) -> List[str]:
 
 
 def deduplicate_preserve_order(items: Iterable[str]) -> List[str]:
-    """Remove duplicates from *items* while preserving first-seen order."""
+    """Remove duplicates from items while preserving first-seen order."""
     seen: set[str] = set()
     result: List[str] = []
     for item in items:
@@ -92,7 +92,7 @@ def deduplicate_preserve_order(items: Iterable[str]) -> List[str]:
 
 
 def sort_ip_addresses(addresses: Iterable[str]) -> List[str]:
-    """Return *addresses* sorted numerically (not lexicographically).
+    """Return addresses sorted numerically (not lexicographically).
 
     ``"9.0.0.0"`` therefore sorts before ``"10.0.0.0"``.
     """
